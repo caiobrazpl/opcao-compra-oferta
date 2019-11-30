@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,7 +30,6 @@ public class BuyOption extends AbstractEntity<Long> {
     @NotNull
     private Double normalPrice;
 
-    @NotNull
     private Double salePrice;
 
     @NotNull
@@ -39,15 +39,26 @@ public class BuyOption extends AbstractEntity<Long> {
     private Long quantityCoupon;
 
     @NotNull
-    @FutureOrPresent
     private LocalDateTime startDate;
 
+    @NotNull
+    @FutureOrPresent
     private LocalDateTime endDate;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dealId")
     private Deal deal;
+
+    public BuyOption() {
+    }
+
+    public BuyOption(Long id) {
+        this.id = id;
+    }
+    public BuyOption(Deal deal) {
+        this.deal = deal;
+    }
 
     @Override
     public Long getId() {

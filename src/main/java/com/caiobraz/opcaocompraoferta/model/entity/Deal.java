@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.caiobraz.opcaocompraoferta.core.entity.AbstractEntity;
-import com.caiobraz.opcaocompraoferta.model.entity.enuns.DealType;
+import com.caiobraz.opcaocompraoferta.model.enuns.DealType;
 
 @Entity
 public class Deal extends AbstractEntity<Long> {
@@ -30,7 +30,7 @@ public class Deal extends AbstractEntity<Long> {
     @NotBlank
     private String text;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime createDate;
 
     private LocalDateTime publishDate;
@@ -48,6 +48,13 @@ public class Deal extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "deal")
     private List<BuyOption> buyOptions;
+
+    public Deal() {
+    }
+
+    public Deal(@NotBlank Long id) {
+        this.id = id;
+    }
 
     @Override
     public Long getId() {
