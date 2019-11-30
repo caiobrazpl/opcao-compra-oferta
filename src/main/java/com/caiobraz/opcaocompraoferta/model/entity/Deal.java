@@ -1,6 +1,8 @@
 package com.caiobraz.opcaocompraoferta.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -17,11 +20,9 @@ import com.caiobraz.opcaocompraoferta.model.entity.enuns.DealType;
 @Entity
 public class Deal extends AbstractEntity<Long> {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @NotBlank
     private String title;
@@ -44,6 +45,9 @@ public class Deal extends AbstractEntity<Long> {
     @NotNull
     @Enumerated(value = EnumType.STRING)
     private DealType type;
+
+    @OneToMany(mappedBy = "deal")
+    private List<BuyOption> buyOptions;
 
     @Override
     public Long getId() {
@@ -116,5 +120,14 @@ public class Deal extends AbstractEntity<Long> {
 
     public void setType(DealType type) {
         this.type = type;
+    }
+
+    public List<BuyOption> getBuyOptions() {
+        if (buyOptions == null) buyOptions = new ArrayList<>();
+        return buyOptions;
+    }
+
+    public void setBuyOptions(List<BuyOption> buyOptions) {
+        this.buyOptions = buyOptions;
     }
 }
