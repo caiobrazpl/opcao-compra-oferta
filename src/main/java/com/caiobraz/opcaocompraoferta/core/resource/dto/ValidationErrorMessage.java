@@ -1,9 +1,9 @@
 package com.caiobraz.opcaocompraoferta.core.resource.dto;
 
-import org.springframework.http.HttpStatus;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
 
 public class ValidationErrorMessage extends ErrorMassage {
 

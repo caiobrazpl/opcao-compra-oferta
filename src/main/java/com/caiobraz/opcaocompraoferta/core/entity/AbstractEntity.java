@@ -1,9 +1,9 @@
-package com.caiobraz.opcaocompraoferta.core.model;
+package com.caiobraz.opcaocompraoferta.core.entity;
+
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

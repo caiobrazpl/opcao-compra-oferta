@@ -1,7 +1,9 @@
 package com.caiobraz.opcaocompraoferta.core.service;
 
-import com.caiobraz.opcaocompraoferta.core.exception.ServiceException;
-import com.caiobraz.opcaocompraoferta.core.model.AbstractEntity;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
+import com.caiobraz.opcaocompraoferta.core.entity.AbstractEntity;
+import com.caiobraz.opcaocompraoferta.core.exception.ServiceException;
 
 public abstract class AbstractService<T extends AbstractEntity<I>, I> implements Serializable {
 

@@ -1,8 +1,8 @@
 package com.caiobraz.opcaocompraoferta.core.resource.dto;
 
-import org.springframework.http.HttpStatus;
-
 import java.io.Serializable;
+
+import org.springframework.http.HttpStatus;
 
 public class ErrorMassage implements Serializable {
 
