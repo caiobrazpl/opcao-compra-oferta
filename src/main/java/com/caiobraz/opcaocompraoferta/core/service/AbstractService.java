@@ -55,13 +55,13 @@ public abstract class AbstractService<T extends AbstractEntity<I>, I> implements
 
     public T findById(I id) {
         return this.repository.findById(id).orElseThrow(
-                () -> new ServiceException(messages.string("geral.registroNaoEncontrado"))
+                () -> new ServiceException(messages.string("default.entityNotFound"))
         );
     }
 
     protected void validateExistence(I i) {
         if (!repository.existsById(i)) {
-            throw new ServiceException(messages.string("geral.registroNaoEncontrado"));
+            throw new ServiceException(messages.string("default.entityNotFound"));
         }
     }
 

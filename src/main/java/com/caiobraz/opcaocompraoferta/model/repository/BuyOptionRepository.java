@@ -2,6 +2,7 @@ package com.caiobraz.opcaocompraoferta.model.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,6 @@ import com.caiobraz.opcaocompraoferta.model.entity.Deal;
 public interface BuyOptionRepository extends JpaRepository<BuyOption, Long> {
 
     List<BuyOption> findAllByDealAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfter(Deal deal, Long aLong, LocalDateTime startDate, LocalDateTime endDate);
+
+    Optional<BuyOption> findByIdAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfter(Long deal, Long aLong, LocalDateTime startDate, LocalDateTime endDate);
 }
