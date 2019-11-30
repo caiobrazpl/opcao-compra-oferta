@@ -1,4 +1,4 @@
-package com.caiobraz.opcaocompraoferta.model.entity.enuns;
+package com.caiobraz.opcaocompraoferta.model.enuns;
 
 public enum DealType {
 
