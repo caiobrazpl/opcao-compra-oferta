@@ -1,4 +1,4 @@
-package com.caiobraz.opcaocompraoferta.core.model;
+package com.caiobraz.opcaocompraoferta.core.entity;
 
 import java.io.Serializable;
 

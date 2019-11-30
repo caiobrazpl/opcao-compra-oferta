@@ -1,14 +1,16 @@
 package com.caiobraz.opcaocompraoferta.core.resource.handler;
 
-import com.caiobraz.opcaocompraoferta.core.exception.ServiceException;
-import com.caiobraz.opcaocompraoferta.core.resource.dto.ErrorMassage;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import com.caiobraz.opcaocompraoferta.core.exception.ServiceException;
+import com.caiobraz.opcaocompraoferta.core.resource.dto.ErrorMassage;
 
 @ControllerAdvice
 public class DefaultHandler {
