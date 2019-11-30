@@ -3,6 +3,7 @@ package com.caiobraz.opcaocompraoferta.model.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -54,6 +55,15 @@ public class Deal extends AbstractEntity<Long> {
 
     public Deal(@NotBlank Long id) {
         this.id = id;
+    }
+
+    public void updateTotalSold() {
+        if (Optional.ofNullable(this.getTotalSold()).isPresent()) {
+            this.setTotalSold(this.getTotalSold() + 1);
+            return;
+        }
+
+        this.setTotalSold(1L);
     }
 
     @Override

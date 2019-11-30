@@ -2,6 +2,7 @@ package com.caiobraz.opcaocompraoferta.model.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -56,6 +57,7 @@ public class BuyOption extends AbstractEntity<Long> {
     public BuyOption(Long id) {
         this.id = id;
     }
+
     public BuyOption(Deal deal) {
         this.deal = deal;
     }

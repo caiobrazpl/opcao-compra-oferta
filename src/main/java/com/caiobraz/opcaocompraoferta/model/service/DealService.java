@@ -1,7 +1,6 @@
 package com.caiobraz.opcaocompraoferta.model.service;
 
 import java.net.URI;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,14 +53,7 @@ public class DealService extends AbstractService<Deal, Long> {
 
     public Deal updateTotalSold(Long idDeal) {
         Deal deal = super.findById(idDeal);
-
-        if (Optional.ofNullable(deal.getTotalSold()).isPresent()) {
-            deal.setTotalSold(deal.getTotalSold() + 1);
-
-            return update(deal);
-        }
-
-        deal.setTotalSold(1L);
+        deal.updateTotalSold();
 
         return update(deal);
     }
