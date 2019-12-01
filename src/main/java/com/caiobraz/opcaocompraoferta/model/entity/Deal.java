@@ -1,5 +1,6 @@
 package com.caiobraz.opcaocompraoferta.model.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -32,15 +36,11 @@ public class Deal extends AbstractEntity<Long> {
     private String text;
 
     @NotNull
+    private LocalDate publishDate;
+
     private LocalDateTime createDate;
-
-    private LocalDateTime publishDate;
-
     private LocalDateTime endDate;
-
-    @NotBlank
     private String url;
-
     private Long totalSold;
 
     @NotNull
@@ -49,6 +49,12 @@ public class Deal extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "deal")
     private List<BuyOption> buyOptions;
+
+    @NotNull
+    @Min(1)
+    @Max(30)
+    @Transient
+    private Integer validity;
 
     public Deal() {
     }
@@ -99,11 +105,11 @@ public class Deal extends AbstractEntity<Long> {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getPublishDate() {
+    public LocalDate getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(LocalDateTime publishDate) {
+    public void setPublishDate(LocalDate publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -137,6 +143,14 @@ public class Deal extends AbstractEntity<Long> {
 
     public void setType(DealType type) {
         this.type = type;
+    }
+
+    public Integer getValidity() {
+        return validity;
+    }
+
+    public void setValidity(Integer validity) {
+        this.validity = validity;
     }
 
     public List<BuyOption> getBuyOptions() {

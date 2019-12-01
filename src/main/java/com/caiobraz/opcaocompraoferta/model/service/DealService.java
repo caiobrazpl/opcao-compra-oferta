@@ -1,10 +1,11 @@
 package com.caiobraz.opcaocompraoferta.model.service;
 
-import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.Period;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.caiobraz.opcaocompraoferta.core.service.AbstractService;
 import com.caiobraz.opcaocompraoferta.model.entity.BuyOption;
@@ -15,6 +16,9 @@ import com.caiobraz.opcaocompraoferta.model.repository.DealRepository;
 public class DealService extends AbstractService<Deal, Long> {
 
     private BuyOptionService optionService;
+
+    @Value("${url.front.viewDeal}")
+    private String urlViewDeal;
 
     @Autowired
     public DealService(DealRepository repository, BuyOptionService optionService) {
@@ -30,10 +34,10 @@ public class DealService extends AbstractService<Deal, Long> {
     }
 
     public Deal insert(Deal deal) {
+        this.prepareDealToInsert(deal);
         super.insert(deal);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(deal.getId()).toUri();
-        deal.setUrl(uri.toString());
+        deal.setUrl(this.urlViewDeal + deal.getId());
 
         super.update(deal);
 
@@ -56,5 +60,12 @@ public class DealService extends AbstractService<Deal, Long> {
         deal.updateTotalSold();
 
         return update(deal);
+    }
+
+    private void prepareDealToInsert(Deal deal) {
+        deal.setTotalSold(0L);
+        deal.setCreateDate(LocalDateTime.now());
+        deal.setEndDate(deal.getPublishDate().atTime(23, 59, 59)
+                .plus(Period.ofDays(deal.getValidity())));
     }
 }
