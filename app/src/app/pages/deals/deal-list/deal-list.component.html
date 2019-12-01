@@ -3,7 +3,7 @@
     <h1 class="h2 pl-2">Ofertas</h1>
   </div>
   <div class="col-md">
-    <a href="#" class="btn btn-success float-right">Nova Oferta</a>
+    <a routerLink="new" class="btn btn-success float-right">Nova Oferta</a>
   </div>
 </div>
 
@@ -12,13 +12,14 @@
   <tbody>
   <tr *ngFor="let deal of deals">
     <td>
-      <strong>{{deal.text}}</strong><br>
-      <small class="text-secondary">a partir de:</small><br>
-      <strong class="text-orange pl-3">R$ {{deal.minValue}}</strong>
+      <strong>{{deal.title}}</strong><br>
+      <small class="text-secondary">{{deal.text}}</small><br>
+      <small class="text-secondary" *ngIf="deal.buyOptions?.length > 0">a partir de:</small><br>
+      <strong class="text-orange pl-3" *ngIf="deal.buyOptions?.length > 0">R$ {{deal.minValue}}</strong>
     </td>
 
     <td class="text-center">
-      <a [routerLink]="[deal.id]" class="btn btn-outline-danger btn-sm mr-2 text-uppercase">Ver Oferta</a>
+      <a [routerLink]="['view', deal.id]" class="btn btn-outline-danger btn-sm mr-2 text-uppercase">Ver Oferta</a>
     </td>
 
   </tr>
