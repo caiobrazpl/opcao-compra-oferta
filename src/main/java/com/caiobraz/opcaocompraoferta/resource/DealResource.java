@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.caiobraz.opcaocompraoferta.model.entity.BuyOption;
 import com.caiobraz.opcaocompraoferta.model.entity.Deal;
@@ -52,10 +53,11 @@ public class DealResource {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> insert(@Valid @RequestBody Deal deal) throws URISyntaxException {
+    public ResponseEntity<Void> insert(@Valid @RequestBody Deal deal) {
         deal = this.dealService.insert(deal);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(deal.getId()).toUri();
 
-        return ResponseEntity.created(new URI(deal.getUrl())).build();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

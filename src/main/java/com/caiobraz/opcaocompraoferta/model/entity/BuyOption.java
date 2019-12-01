@@ -2,14 +2,12 @@ package com.caiobraz.opcaocompraoferta.model.entity;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,6 +25,9 @@ public class BuyOption extends AbstractEntity<Long> {
 
     @NotBlank
     private String title;
+
+    @NotBlank
+    private String text;
 
     @NotNull
     private Double normalPrice;
@@ -133,5 +134,13 @@ public class BuyOption extends AbstractEntity<Long> {
 
     public void setDeal(Deal deal) {
         this.deal = deal;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

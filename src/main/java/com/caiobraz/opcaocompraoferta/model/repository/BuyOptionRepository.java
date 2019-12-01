@@ -13,7 +13,7 @@ import com.caiobraz.opcaocompraoferta.model.entity.Deal;
 @Repository
 public interface BuyOptionRepository extends JpaRepository<BuyOption, Long> {
 
-    List<BuyOption> findAllByDealAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfter(Deal deal, Long aLong, LocalDateTime startDate, LocalDateTime endDate);
+    List<BuyOption> findAllByDealAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfterOrderBySalePrice(Deal deal, Long aLong, LocalDateTime startDate, LocalDateTime endDate);
 
     Optional<BuyOption> findByIdAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfter(Long deal, Long aLong, LocalDateTime startDate, LocalDateTime endDate);
 }
