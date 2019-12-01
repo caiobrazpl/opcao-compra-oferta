@@ -1,0 +1,26 @@
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2 pl-2">Ofertas</h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="new" class="btn btn-success float-right">Nova Oferta</a>
+  </div>
+</div>
+
+<table class="table table-hover">
+
+  <tbody>
+  <tr *ngFor="let deal of deals">
+    <td>
+      <strong>{{deal.text}}</strong><br>
+      <small class="text-secondary">a partir de:</small><br>
+      <strong class="text-danger pl-3">R$ {{minValue(deal)}}</strong>
+    </td>
+
+    <td class="text-center">
+      <a routerLink="{{deal.id}}" class="btn btn-outline-info btn-sm mr-2 text-uppercase">Ver Oferta</a>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
