@@ -8,13 +8,15 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
 import {DealDetailComponent} from "./pages/deal-detail/deal-detail.component";
 import {DealFormComponent} from "./pages/deal-form/deal-form.component";
 import {OptionDetailComponent} from "../options/pages/option-detail/option-detail.component";
+import {OptionFormComponent} from "../options/pages/optrion-form/option-form.component";
 
 @NgModule({
   declarations: [
     DealListComponent,
     DealDetailComponent,
     DealFormComponent,
-    OptionDetailComponent
+    OptionDetailComponent,
+    OptionFormComponent
   ],
   imports: [
     CommonModule,

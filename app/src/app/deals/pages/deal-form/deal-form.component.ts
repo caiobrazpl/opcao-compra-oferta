@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class DealFormComponent implements OnInit {
 
-  entryForm: FormGroup;
+  formGroup: FormGroup;
   errorMessages: string[] = [];
 
   constructor(private dealService: DealService,
@@ -25,7 +25,7 @@ export class DealFormComponent implements OnInit {
   }
 
   private buildForm() {
-    this.entryForm = this.formBuilder.group({
+    this.formGroup = this.formBuilder.group({
       title: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       text: [null, [Validators.required, Validators.maxLength(255)]],
       publishDate: [null, [Validators.required]],
@@ -35,7 +35,7 @@ export class DealFormComponent implements OnInit {
   }
 
   submitForm() {
-    const deal: Deal = new Deal(this.entryForm.value);
+    const deal: Deal = new Deal(this.formGroup.value);
 
     this.dealService.insert(deal).subscribe(
       value => this.success(value),

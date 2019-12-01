@@ -1,5 +1,8 @@
 package com.caiobraz.opcaocompraoferta.model.entity;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -58,6 +61,17 @@ public class BuyOption extends AbstractEntity<Long> {
 
     public BuyOption(Deal deal) {
         this.deal = deal;
+    }
+
+    public void calculateSalePrice() {
+        BigDecimal normalPrice = BigDecimal.valueOf(this.getNormalPrice());
+
+        BigDecimal percentageDiscount = BigDecimal.valueOf(this.getPercentageDiscount());
+        percentageDiscount = percentageDiscount.divide(new BigDecimal(100), new MathContext(2, RoundingMode.HALF_UP));
+
+        BigDecimal discount = normalPrice.multiply(percentageDiscount);
+
+        this.setSalePrice(normalPrice.subtract(discount).doubleValue());
     }
 
     @Override

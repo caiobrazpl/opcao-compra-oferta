@@ -34,11 +34,14 @@ export class DealDetailComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
 
   viewBuyOption(option: BuyOption) {
-    this.router.navigateByUrl('deals/buyOptions/' +  option.id);
+    this.router.navigateByUrl('deals/buyOptions/view/' + option.id + '?idDeal=' + this.deal.id).then();
+  }
+
+  newBuyOption() {
+    this.router.navigateByUrl('deals/buyOptions/new?idDeal=' + this.deal.id).then();
   }
 
 }
