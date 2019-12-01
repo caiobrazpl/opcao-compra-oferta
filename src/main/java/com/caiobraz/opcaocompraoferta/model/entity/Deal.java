@@ -12,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -47,7 +46,7 @@ public class Deal extends AbstractEntity<Long> {
     @Enumerated(value = EnumType.STRING)
     private DealType type;
 
-    @OneToMany(mappedBy = "deal")
+    @Transient
     private List<BuyOption> buyOptions;
 
     @NotNull

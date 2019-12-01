@@ -12,8 +12,6 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import com.caiobraz.opcaocompraoferta.core.entity.AbstractEntity;
 
 @Entity
@@ -47,7 +45,6 @@ public class BuyOption extends AbstractEntity<Long> {
     @FutureOrPresent
     private LocalDateTime endDate;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dealId")
     private Deal deal;

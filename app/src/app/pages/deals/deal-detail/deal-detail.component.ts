@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Deal} from "../model/deal";
 import {DealService} from "../model/deal.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {BuyOption} from "../../options/model/buy-option";
 
@@ -16,7 +16,8 @@ export class DealDetailComponent implements OnInit {
   buyOptions: BuyOption[] = [];
 
   constructor(private dealService: DealService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router,) {
   }
 
   ngOnInit(): void {
@@ -35,6 +36,10 @@ export class DealDetailComponent implements OnInit {
       }
     );
 
+  }
+
+  viewBuyOption(option: BuyOption) {
+    this.router.navigateByUrl('deals/buyOptions/' +  option.id);
   }
 
 }

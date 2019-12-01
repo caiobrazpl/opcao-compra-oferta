@@ -1,3 +1,10 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" routerLink="/deals">Ofertas</li>
+    <li class="breadcrumb-item active">{{deal?.title}}</li>
+  </ol>
+</nav>
+
 <div class="row mb-12">
   <div class="col-md">
     <h1 class="h2 pl-2">{{deal?.text}}</h1>
@@ -32,7 +39,7 @@
     </td>
 
     <td class="text-center">
-      <button [routerLink]="[option.id, 'edit']" [disabled]="option?.quantityCoupon <= 0"
+      <button (click)="viewBuyOption(option)" [disabled]="option?.quantityCoupon <= 0"
               class="btn btn-danger btn-sm mr-2 text-uppercase float-right">
         Compre
       </button>
