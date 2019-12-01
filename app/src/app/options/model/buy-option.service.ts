@@ -2,37 +2,30 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {Deal} from "./deal";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../environments/environment";
+import {BuyOption} from "./buy-option";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DealService {
+export class BuyOptionService {
 
-  private API_PATH = environment.API + 'deals';
+  private API_PATH = environment.API + 'buyOptions';
 
   constructor(private http: HttpClient) {
   }
 
-  listAll(): Observable<Deal[]> {
-    return this.http.get<Deal[]>(this.API_PATH).pipe(
+  getById(id: number): Observable<BuyOption> {
+    return this.http.get<BuyOption>(`${this.API_PATH}/${id}`).pipe(
       catchError(this.handleError),
-      map(this.jsonDataToDeals)
+      map(this.jsonDataToBuyOption)
     );
   }
 
-  getById(id: number): Observable<Deal> {
-    return this.http.get<Deal>(`${this.API_PATH}/${id}`).pipe(
-      catchError(this.handleError),
-      map(this.jsonDataToDeal)
-    );
-  }
-
-  insert(deal: Deal): Observable<Deal> {
+  insert(deal: BuyOption): Observable<BuyOption> {
     return this.http.post(this.API_PATH, deal).pipe(
       catchError(this.handleError),
-      map(this.jsonDataToDeal)
+      map(this.jsonDataToBuyOption)
     );
   }
 
@@ -43,7 +36,7 @@ export class DealService {
     );
   }
 
-  update(deal: Deal): Observable<Deal> {
+  update(deal: BuyOption): Observable<BuyOption> {
     return this.http.put(`${this.API_PATH}/${deal.id}`, deal).pipe(
       catchError(this.handleError),
       map(() => deal)
@@ -55,17 +48,7 @@ export class DealService {
     return throwError(error);
   }
 
-  private jsonDataToDeals(jsonData: any): Deal[] {
-    const deals: Deal[] = [];
-
-    jsonData['content'].forEach(value => {
-      deals.push(new Deal(value));
-    });
-
-    return deals;
-  }
-
-  private jsonDataToDeal(jsonData: any): Deal {
-    return jsonData as Deal;
+  private jsonDataToBuyOption(jsonData: any): BuyOption {
+    return new BuyOption(jsonData);
   }
 }

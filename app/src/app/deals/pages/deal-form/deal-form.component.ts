@@ -1,14 +1,13 @@
 import {Component, OnInit} from "@angular/core";
-import {Deal} from "../model/deal";
-import {DealService} from "../model/deal.service";
+import {Deal} from "../../model/deal";
+import {DealService} from "../../model/deal.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-deal-form',
-  templateUrl: './deal-form.component.html',
-  styleUrls: ['./deal-form.component.scss']
+  templateUrl: './deal-form.component.html'
 })
 export class DealFormComponent implements OnInit {
 

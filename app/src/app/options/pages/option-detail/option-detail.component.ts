@@ -1,9 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BuyOption} from "../model/buy-option";
+import {BuyOption} from "../../model/buy-option";
 import {switchMap} from "rxjs/operators";
-import {BuyOptionService} from "../model/buy-option.service";
-import {Deal} from "../../deals/model/deal";
+import {BuyOptionService} from "../../model/buy-option.service";
 
 @Component({
   selector: 'app-option-detail',

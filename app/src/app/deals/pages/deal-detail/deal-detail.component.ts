@@ -1,14 +1,13 @@
 import {Component, OnInit} from "@angular/core";
-import {Deal} from "../model/deal";
-import {DealService} from "../model/deal.service";
+import {Deal} from "../../model/deal";
+import {DealService} from "../../model/deal.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
-import {BuyOption} from "../../options/model/buy-option";
+import {BuyOption} from "../../../options/model/buy-option";
 
 @Component({
   selector: 'app-deal-detail',
-  templateUrl: './deal-detail.component.html',
-  styleUrls: ['./deal-detail.component.scss']
+  templateUrl: './deal-detail.component.html'
 })
 export class DealDetailComponent implements OnInit {
 

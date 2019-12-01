@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DealListComponent} from './deal-list/deal-list.component';
-import {DealDetailComponent} from "./deal-detail/deal-detail.component";
-import {DealFormComponent} from "./deal-form/deal-form.component";
-import {OptionDetailComponent} from "../options/option-detail/option-detail.component";
+import {DealListComponent} from './pages/deal-list/deal-list.component';
+import {DealDetailComponent} from "./pages/deal-detail/deal-detail.component";
+import {DealFormComponent} from "./pages/deal-form/deal-form.component";
+import {OptionDetailComponent} from "../options/pages/option-detail/option-detail.component";
 
 const routes: Routes = [
   {path: '', component: DealListComponent},
