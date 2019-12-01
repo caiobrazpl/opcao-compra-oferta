@@ -28,6 +28,9 @@ public class BuyOption extends AbstractEntity<Long> {
     @NotBlank
     private String title;
 
+    @NotBlank
+    private String text;
+
     @NotNull
     private Double normalPrice;
 
@@ -133,5 +136,13 @@ public class BuyOption extends AbstractEntity<Long> {
 
     public void setDeal(Deal deal) {
         this.deal = deal;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

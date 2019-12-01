@@ -57,7 +57,10 @@ export class DealService {
 
   private jsonDataToDeals(jsonData: any): Deal[] {
     const deals: Deal[] = [];
-    jsonData['content'].forEach(value => deals.push(value as Deal));
+
+    jsonData['content'].forEach(value => {
+      deals.push(new Deal(value));
+    });
 
     return deals;
   }

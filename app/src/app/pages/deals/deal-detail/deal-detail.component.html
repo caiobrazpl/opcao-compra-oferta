@@ -1,0 +1,43 @@
+<div class="row mb-12">
+  <div class="col-md">
+    <h1 class="h2 pl-2">{{deal?.text}}</h1>
+  </div>
+</div>
+
+<div class="row mb-12 pt-4 pl-3 pb-3">
+  <div class="col-md">
+    <a href="#" class="btn btn-primary float-left text-uppercase">Nova</a>
+  </div>
+</div>
+
+<table class="table table-hover table-responsive-lg" *ngIf="deal?.buyOptions">
+  <thead>
+  <tr class="bg-light text-dark">
+    <th colspan="6">Escolha sua oferta</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let option of deal?.buyOptions">
+
+    <td colspan="4">
+      <span>{{option.title}}</span><br>
+      <small  class="text-secondary pl-1" *ngIf="option.text">{{option.text}}</small>
+    </td>
+
+    <td>
+      <span class="float-left">
+        R$ {{option.salePrice?.toFixed(2).toString().replace('.', ',')}}
+      </span>
+    </td>
+
+    <td class="text-center">
+      <button [routerLink]="[option.id, 'edit']" [disabled]="option?.quantityCoupon <= 0"
+              class="btn btn-danger btn-sm mr-2 text-uppercase float-right">
+        Compre
+      </button>
+    </td>
+
+  </tr>
+  </tbody>
+</table>

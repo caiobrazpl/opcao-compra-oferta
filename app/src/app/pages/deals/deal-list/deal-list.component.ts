@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Deal} from "../model/deal";
 import {DealService} from "../model/deal.service";
-import {BuyOption} from "../../options/model/buy-option";
 
 @Component({
   selector: 'app-deal-list',
@@ -21,18 +20,4 @@ export class DealListComponent implements OnInit{
     })
   }
 
-  minValue(deal: Deal): number {
-    if (deal.buyOptions) {
-
-      let option: BuyOption = deal.buyOptions.reduce((prev, curr) => {
-        return prev.salePrice < curr.salePrice ? prev : curr;
-      });
-
-      if (option) {
-        return option.salePrice;
-      }
-    }
-
-    return null;
-  }
 }

@@ -30,7 +30,7 @@ public class BuyOptionService extends AbstractService<BuyOption, Long> {
     }
 
     public List<BuyOption> findAllActivesByDeal(Deal deal) {
-        return repository.findAllByDealAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfter(
+        return repository.findAllByDealAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfterOrderBySalePrice(
                 deal, 0L, LocalDateTime.now(), LocalDateTime.now()
         );
     }

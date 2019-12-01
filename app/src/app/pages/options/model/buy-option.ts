@@ -1,7 +1,13 @@
 export class BuyOption {
 
-  constructor(public salePrice: number) {
-
-  }
+  id: number;
+  title: string;
+  text: string;
+  normalPrice: number;
+  salePrice: number;
+  percentageDiscount: number;
+  quantityCoupon: number;
+  startDate: string;
+  endDate: string;
 
 }
