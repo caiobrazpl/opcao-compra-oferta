@@ -1,0 +1,134 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" routerLink="/deals">Ofertas</li>
+    <li class="breadcrumb-item" *ngIf="deal" routerLink="/deals/view/{{deal?.id}}" >{{deal?.title}}</li>
+    <li class="breadcrumb-item active">Nova Opção de Compra</li>
+  </ol>
+</nav>
+
+<form [formGroup]="formGroup" (submit)="submitForm()">
+
+  <div class="card">
+    <div class="card-header">
+      Informações da Opção de Compra
+    </div>
+
+    <div class="card-body">
+
+      <div class="form-row" *ngIf="deal">
+        <div class="form-group col-md-12">
+          <span class="font-weight-bold">Oferta: {{deal?.title}}</span><br>
+          <span class="text-secondary pl-2">{{deal?.text}}</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <label for="title">Título</label>
+          <input type="text" id="title" class="form-control" formControlName="title">
+
+          <div class="text-danger" *ngIf="formGroup.get('title').invalid && formGroup.get('title').touched">
+            <div *ngIf="formGroup.get('title').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('title').errors.minlength">deve ter no mínimo 2 caracteres</div>
+            <div *ngIf="formGroup.get('title').errors.maxlength">deve ter no máximo 255 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <div class="form-row">
+            <div class="col-lg-12 col-md-12 col-sm12">
+              <label for="startDate">Data de entrada</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm12">
+              <input class="form-control" type="datetime-local" id="startDate" formControlName="startDate">
+            </div>
+          </div>
+
+          <div class="text-danger" *ngIf="formGroup.get('startDate').invalid && formGroup.get('startDate').touched">
+            <div *ngIf="formGroup.get('startDate').errors.required">campo obrigatório</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <div class="form-row">
+            <div class="col-lg-12 col-md-12 col-sm12">
+              <label for="endDate">Data de saída</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm12">
+              <input class="form-control" type="datetime-local" id="endDate" formControlName="endDate">
+            </div>
+          </div>
+
+          <div class="text-danger" *ngIf="formGroup.get('endDate').invalid && formGroup.get('endDate').touched">
+            <div *ngIf="formGroup.get('endDate').errors.required">campo obrigatório</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <label for="normalPrice">Preço de venda normal</label>
+          <input class="form-control" type="number" id="normalPrice" formControlName="normalPrice">
+
+          <div class="text-danger" *ngIf="formGroup.get('normalPrice').invalid && formGroup.get('normalPrice').touched">
+            <div *ngIf="formGroup.get('normalPrice').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('normalPrice').errors.min">deve ter no mínimo 0</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="percentageDiscount">Percentual de desconto</label>
+          <input class="form-control" type="number" id="percentageDiscount" formControlName="percentageDiscount">
+
+          <div class="text-danger" *ngIf="formGroup.get('percentageDiscount').invalid && formGroup.get('percentageDiscount').touched">
+            <div *ngIf="formGroup.get('percentageDiscount').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('percentageDiscount').errors.min">deve ter no mínimo 0</div>
+            <div *ngIf="formGroup.get('percentageDiscount').errors.max">deve ter no máximo 99</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="quantityCoupon">Quantidade total de cupons</label>
+          <input class="form-control" type="number" id="quantityCoupon" formControlName="quantityCoupon">
+
+          <div class="text-danger" *ngIf="formGroup.get('quantityCoupon').invalid && formGroup.get('quantityCoupon').touched">
+            <div *ngIf="formGroup.get('quantityCoupon').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('quantityCoupon').errors.min">deve ter no mínimo 0</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group col-md-12">
+          <label for="text">Descrição</label>
+          <input type="text" id="text" class="form-control" formControlName="text">
+
+          <div class="text-danger" *ngIf="formGroup.get('text').invalid && formGroup.get('text').touched">
+            <div *ngIf="formGroup.get('text').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('text').errors.maxlength">deve ter no máximo 255 caracteres</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="alert alert-danger mt-2" *ngIf="errorMessages && errorMessages.length > 0">
+    <strong>Erro no servidor</strong>
+    <ul>
+      <li *ngFor="let error of errorMessages">{{error}}</li>
+    </ul>
+  </div>
+
+  <button [disabled]="formGroup.invalid" type="submit"
+          class="btn btn-primary btn-lg float-right mt-3">
+    Salvar
+  </button>
+
+</form>

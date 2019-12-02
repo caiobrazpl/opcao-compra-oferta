@@ -29,6 +29,28 @@ public class BuyOptionService extends AbstractService<BuyOption, Long> {
         this.dealRepository = dealRepository;
     }
 
+    @Override
+    public BuyOption insert(BuyOption buyOption) {
+        buyOption.calculateSalePrice();
+
+        return super.insert(buyOption);
+    }
+
+    public BuyOption sellUnit(Long idOption) {
+        BuyOption option = this.findActivesById(idOption);
+
+        Deal deal = Optional.of(option.getDeal()).orElseThrow(
+                () -> new ServiceException(messages.string("buyOption.withoutDeal"))
+        );
+        deal.updateTotalSold();
+        deal.setValidity(1);
+        this.dealRepository.save(deal);
+
+        option.setQuantityCoupon(option.getQuantityCoupon() - 1);
+
+        return super.update(option);
+    }
+
     public List<BuyOption> findAllActivesByDeal(Deal deal) {
         return repository.findAllByDealAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfterOrderBySalePrice(
                 deal, 0L, LocalDateTime.now(), LocalDateTime.now()
@@ -39,20 +61,6 @@ public class BuyOptionService extends AbstractService<BuyOption, Long> {
         return repository.findByIdAndQuantityCouponGreaterThanAndStartDateBeforeAndEndDateAfter(
                 idOption, 0L, LocalDateTime.now(), LocalDateTime.now()
         ).orElseThrow(() -> new ServiceException(messages.string("buyOption.activeNotFound")));
-    }
-
-    public BuyOption sellUnit(Long idOption) {
-        BuyOption option = this.findActivesById(idOption);
-
-        Deal deal = Optional.of(option.getDeal()).orElseThrow(
-                () -> new ServiceException(messages.string("buyOption.withoutDeal"))
-        );
-        deal.updateTotalSold();
-        this.dealRepository.save(deal);
-
-        option.setQuantityCoupon(option.getQuantityCoupon() - 1);
-
-        return super.update(option);
     }
 
 }

@@ -1,14 +1,13 @@
 import {Component, OnInit} from "@angular/core";
-import {Deal} from "../model/deal";
-import {DealService} from "../model/deal.service";
-import {ActivatedRoute} from "@angular/router";
+import {Deal} from "../../model/deal";
+import {DealService} from "../../model/deal.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
-import {BuyOption} from "../../options/model/buy-option";
+import {BuyOption} from "../../../options/model/buy-option";
 
 @Component({
   selector: 'app-deal-detail',
-  templateUrl: './deal-detail.component.html',
-  styleUrls: ['./deal-detail.component.scss']
+  templateUrl: './deal-detail.component.html'
 })
 export class DealDetailComponent implements OnInit {
 
@@ -16,7 +15,8 @@ export class DealDetailComponent implements OnInit {
   buyOptions: BuyOption[] = [];
 
   constructor(private dealService: DealService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router,) {
   }
 
   ngOnInit(): void {
@@ -34,7 +34,14 @@ export class DealDetailComponent implements OnInit {
         console.log(error);
       }
     );
+  }
 
+  viewBuyOption(option: BuyOption) {
+    this.router.navigateByUrl('deals/buyOptions/view/' + option.id + '?idDeal=' + this.deal.id).then();
+  }
+
+  newBuyOption() {
+    this.router.navigateByUrl('deals/buyOptions/new?idDeal=' + this.deal.id).then();
   }
 
 }

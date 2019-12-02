@@ -29,6 +29,7 @@ public class DealService extends AbstractService<Deal, Long> {
     public Deal findByIdWithOptions(Long idDeal) {
         Deal deal = super.findById(idDeal);
         deal.setBuyOptions(this.optionService.findAllActivesByDeal(new Deal(idDeal)));
+        deal.getBuyOptions().forEach(buyOption -> buyOption.setDeal(null));
 
         return deal;
     }

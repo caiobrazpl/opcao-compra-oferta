@@ -1,5 +1,8 @@
 package com.caiobraz.opcaocompraoferta.model.entity;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -11,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.caiobraz.opcaocompraoferta.core.entity.AbstractEntity;
 
@@ -47,7 +48,6 @@ public class BuyOption extends AbstractEntity<Long> {
     @FutureOrPresent
     private LocalDateTime endDate;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dealId")
     private Deal deal;
@@ -61,6 +61,17 @@ public class BuyOption extends AbstractEntity<Long> {
 
     public BuyOption(Deal deal) {
         this.deal = deal;
+    }
+
+    public void calculateSalePrice() {
+        BigDecimal normalPrice = BigDecimal.valueOf(this.getNormalPrice());
+
+        BigDecimal percentageDiscount = BigDecimal.valueOf(this.getPercentageDiscount());
+        percentageDiscount = percentageDiscount.divide(new BigDecimal(100), new MathContext(2, RoundingMode.HALF_UP));
+
+        BigDecimal discount = normalPrice.multiply(percentageDiscount);
+
+        this.setSalePrice(normalPrice.subtract(discount).doubleValue());
     }
 
     @Override

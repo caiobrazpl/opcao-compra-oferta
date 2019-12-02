@@ -5,7 +5,7 @@
   </ol>
 </nav>
 
-<form [formGroup]="entryForm" (submit)="submitForm()">
+<form [formGroup]="formGroup" (submit)="submitForm()">
 
   <div class="card">
     <div class="card-header">
@@ -24,8 +24,8 @@
             <option value="TRAVEL">Viagem</option>
           </select>
 
-          <div class="text-danger" *ngIf="entryForm.get('type').invalid && entryForm.get('type').touched">
-            <div *ngIf="entryForm.get('type').errors.required">campo obrigatório</div>
+          <div class="text-danger" *ngIf="formGroup.get('type').invalid && formGroup.get('type').touched">
+            <div *ngIf="formGroup.get('type').errors.required">campo obrigatório</div>
           </div>
         </div>
 
@@ -33,10 +33,10 @@
           <label for="title">Título</label>
           <input type="text" id="title" class="form-control" formControlName="title">
 
-          <div class="text-danger" *ngIf="entryForm.get('title').invalid && entryForm.get('title').touched">
-            <div *ngIf="entryForm.get('title').errors.required">campo obrigatório</div>
-            <div *ngIf="entryForm.get('title').errors.minlength">deve ter no mínimo 2 caracteres</div>
-            <div *ngIf="entryForm.get('title').errors.maxlength">deve ter no máximo 255 caracteres</div>
+          <div class="text-danger" *ngIf="formGroup.get('title').invalid && formGroup.get('title').touched">
+            <div *ngIf="formGroup.get('title').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('title').errors.minlength">deve ter no mínimo 2 caracteres</div>
+            <div *ngIf="formGroup.get('title').errors.maxlength">deve ter no máximo 255 caracteres</div>
           </div>
         </div>
 
@@ -50,8 +50,8 @@
             </div>
           </div>
 
-          <div class="text-danger" *ngIf="entryForm.get('publishDate').invalid && entryForm.get('publishDate').touched">
-            <div *ngIf="entryForm.get('publishDate').errors.required">campo obrigatório</div>
+          <div class="text-danger" *ngIf="formGroup.get('publishDate').invalid && formGroup.get('publishDate').touched">
+            <div *ngIf="formGroup.get('publishDate').errors.required">campo obrigatório</div>
           </div>
         </div>
 
@@ -59,10 +59,10 @@
           <label for="validity">Validade da Oferta</label>
           <input class="form-control" type="number" id="validity" formControlName="validity">
 
-          <div class="text-danger" *ngIf="entryForm.get('validity').invalid && entryForm.get('validity').touched">
-            <div *ngIf="entryForm.get('validity').errors.required">campo obrigatório</div>
-            <div *ngIf="entryForm.get('validity').errors.min">deve ter no mínimo 1 dia</div>
-            <div *ngIf="entryForm.get('validity').errors.max">deve ter no máximo 30 dias</div>
+          <div class="text-danger" *ngIf="formGroup.get('validity').invalid && formGroup.get('validity').touched">
+            <div *ngIf="formGroup.get('validity').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('validity').errors.min">deve ter no mínimo 1 dia</div>
+            <div *ngIf="formGroup.get('validity').errors.max">deve ter no máximo 30 dias</div>
           </div>
         </div>
 
@@ -74,9 +74,9 @@
           <label for="text">Descrição</label>
           <input type="text" id="text" class="form-control" formControlName="text">
 
-          <div class="text-danger" *ngIf="entryForm.get('text').invalid && entryForm.get('text').touched">
-            <div *ngIf="entryForm.get('validity').errors.required">campo obrigatório</div>
-            <div *ngIf="entryForm.get('text').errors.maxlength">deve ter no máximo 255 caracteres</div>
+          <div class="text-danger" *ngIf="formGroup.get('text').invalid && formGroup.get('text').touched">
+            <div *ngIf="formGroup.get('text').errors.required">campo obrigatório</div>
+            <div *ngIf="formGroup.get('text').errors.maxlength">deve ter no máximo 255 caracteres</div>
           </div>
         </div>
 
@@ -92,7 +92,7 @@
     </ul>
   </div>
 
-  <button [disabled]="entryForm.invalid" type="submit"
+  <button [disabled]="formGroup.invalid" type="submit"
           class="btn btn-primary btn-lg float-right mt-3">
     Salvar
   </button>

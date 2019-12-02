@@ -2,7 +2,10 @@ package com.caiobraz.opcaocompraoferta.core.resource.handler;
 
 import java.util.Optional;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,4 +54,31 @@ public class DefaultHandler {
 
         return ResponseEntity.status(error.getStatus()).body(error);
     }
+
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public ResponseEntity<ValidationErrorMessage> handleConstraintViolationException(ConstraintViolationException e, HttpServletRequest request) {
+        ValidationErrorMessage error = new ValidationErrorMessage(
+                HttpStatus.UNPROCESSABLE_ENTITY, this.messages.string("default.validationError"), request.getRequestURI()
+        );
+
+        for (ConstraintViolation<?> fieldError : e.getConstraintViolations()) {
+            error.addErro(fieldError.getPropertyPath().toString(), fieldError.getMessage());
+        }
+
+        return ResponseEntity.status(error.getStatus()).body(error);
+    }
+
+    @ExceptionHandler(value = RollbackException.class)
+    public ResponseEntity<ValidationErrorMessage> handleRollbackException(RollbackException e, HttpServletRequest request) {
+        if (e.getCause() != null && e.getCause() instanceof ConstraintViolationException) {
+            return handleConstraintViolationException((ConstraintViolationException) e.getCause(), request);
+        }
+
+        ValidationErrorMessage error = new ValidationErrorMessage(
+                HttpStatus.INTERNAL_SERVER_ERROR, this.messages.string("default.validationError"), request.getRequestURI()
+        );
+
+        return ResponseEntity.status(error.getStatus()).body(error);
+    }
+
 }
