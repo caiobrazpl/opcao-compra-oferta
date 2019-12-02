@@ -1,0 +1,38 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" routerLink="/deals">Ofertas</li>
+    <li class="breadcrumb-item" routerLink="/deals/view/{{option?.deal.id}}" >{{option?.deal.title}}</li>
+    <li class="breadcrumb-item active">{{option?.title}}</li>
+  </ol>
+</nav>
+
+<div class="jumbotron jumbotron-fluid">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <span class="h2">{{option?.text}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 lead">
+        <p class="pl-3 pt-2">De R$
+          <span style="text-decoration: line-through;">{{option?.normalPrice.toFixed(2).toString().replace('.', ',')}}</span> por:
+          <strong class="text-orange pl-1" >R$ {{option?.salePrice.toFixed(2).toString().replace('.', ',')}}</strong>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-danger btn-lg mr-2 text-uppercase float-right" (click)="buyOption()">
+      Compre
+    </button>
+  </div>
+</div>
+
