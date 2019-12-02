@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BuyOption} from "../../model/buy-option";
 import {switchMap} from "rxjs/operators";
 import {BuyOptionService} from "../../model/buy-option.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-option-detail',
@@ -14,7 +15,8 @@ export class OptionDetailComponent implements OnInit {
 
   constructor(private optionService: BuyOptionService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -34,4 +36,15 @@ export class OptionDetailComponent implements OnInit {
     );
   }
 
+  buyOption() {
+    this.optionService.sellUnit(this.option.id).subscribe(value => {
+
+        this.router.navigateByUrl('deals', {skipLocationChange: true}).then(
+          () => this.toastr.success('Compra efetuada.', 'Sucesso')
+        );
+
+      },
+      error => this.toastr.error(JSON.stringify(error.error.errors), 'Erro')
+    );
+  }
 }

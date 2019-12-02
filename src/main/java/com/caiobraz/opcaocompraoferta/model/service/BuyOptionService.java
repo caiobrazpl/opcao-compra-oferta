@@ -43,6 +43,7 @@ public class BuyOptionService extends AbstractService<BuyOption, Long> {
                 () -> new ServiceException(messages.string("buyOption.withoutDeal"))
         );
         deal.updateTotalSold();
+        deal.setValidity(1);
         this.dealRepository.save(deal);
 
         option.setQuantityCoupon(option.getQuantityCoupon() - 1);

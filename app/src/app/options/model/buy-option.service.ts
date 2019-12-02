@@ -29,17 +29,10 @@ export class BuyOptionService {
     );
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.API_PATH}/${id}`).pipe(
+  sellUnit(idBuyOption: number): Observable<BuyOption> {
+    return this.http.post(`${this.API_PATH}/sellUnit/${idBuyOption}`, {}).pipe(
       catchError(this.handleError),
-      map(() => null)
-    );
-  }
-
-  update(deal: BuyOption): Observable<BuyOption> {
-    return this.http.put(`${this.API_PATH}/${deal.id}`, deal).pipe(
-      catchError(this.handleError),
-      map(() => deal)
+      map(this.jsonDataToBuyOption)
     );
   }
 
