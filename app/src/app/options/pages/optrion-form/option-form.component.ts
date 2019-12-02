@@ -3,8 +3,9 @@ import {BuyOption} from "../../model/buy-option";
 import {BuyOptionService} from "../../model/buy-option.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Deal} from "../../../deals/model/deal";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DealService} from "../../../deals/model/deal.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-option-form',
@@ -20,7 +21,9 @@ export class OptionFormComponent implements OnInit {
   constructor(private optionService: BuyOptionService,
               private dealService: DealService,
               private route: ActivatedRoute,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -45,8 +48,14 @@ export class OptionFormComponent implements OnInit {
     buyOption.deal = this.deal;
 
     this.optionService.insert(buyOption).subscribe(
-      value => console.log(value),
+      value => this.success(),
       error => console.log(error)
+    );
+  }
+
+  private success() {
+    this.router.navigateByUrl('deals/view/' + this.deal.id).then(
+      () => this.toastr.success('Registro cadastrado.', 'Sucesso')
     );
   }
 
